@@ -1,47 +1,83 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor Universal</title>
+    <title>FileSwap | Conversor Universal</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%234f46e5%22/><path d=%22M30 50a20 20 0 0 1 20-20h5m15 0a20 20 0 0 1 20 20v0m0 0a20 20 0 0 1-20 20h-5m-15 0a20 20 0 0 1-20-20v0%22 fill=%22none%22 stroke=%22white%22 stroke-width=%228%22 stroke-linecap=%22round%22/><path d=%22M45 20l10 10-10 10M55 80l-10-10 10-10%22 fill=%22none%22 stroke=%22white%22 stroke-width=%228%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
     <link rel="stylesheet" href="style.css">
-    <!-- SheetJS para manipulação de XLSX -->
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Bibliotecas de Processamento -->
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-    <!-- PapaParse para CSV rápido -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <!-- x2js para XML <-> JSON -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Conversor de Arquivos</h1>
-        <p class="subtitle">Converta facilmente entre CSV, JSON, XML e XLSX</p>
+    <header class="app-header">
+        <div class="logo">
+            <i data-lucide="refresh-cw" class="logo-icon"></i>
+            <span>File<span>Swap</span></span>
+        </div>
+        <button id="theme-toggle" class="theme-btn" title="Alternar Tema">
+            <i data-lucide="moon" id="theme-icon"></i>
+        </button>
+    </header>
 
-        <div class="upload-area" id="drop-zone">
-            <input type="file" id="file-input" accept=".csv,.json,.xml,.xlsx">
-            <label for="file-input" class="upload-label">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span id="file-name">Clique para escolher ou arraste um arquivo</span>
-            </label>
+    <main class="container">
+        <section class="hero">
+            <h1>Conversor de Arquivos</h1>
+            <p>Simples, elegante e processado 100% no seu navegador.</p>
+        </section>
+
+        <div class="upload-card">
+            <div class="upload-area" id="drop-zone">
+                <input type="file" id="file-input" accept=".csv,.json,.xml,.xlsx">
+                <div class="upload-content">
+                    <div id="file-type-icon" class="icon-wrapper">
+                        <i data-lucide="upload-cloud"></i>
+                    </div>
+                    <span id="file-name">Arraste um arquivo ou clique para buscar</span>
+                    <span class="file-info">Suporta CSV, JSON, XML e XLSX</span>
+                </div>
+            </div>
+
+            <div id="sheet-selector-container" class="input-group" style="display: none;">
+                <label><i data-lucide="layers"></i> Selecionar Aba:</label>
+                <select id="sheet-selector"></select>
+            </div>
+
+            <div class="conversion-controls">
+                <div class="input-group">
+                    <label><i data-lucide="file-output"></i> Formato de Saída:</label>
+                    <select id="output-format" disabled>
+                        <option value="">Aguardando arquivo...</option>
+                    </select>
+                </div>
+                <button id="convert-btn" class="btn primary" disabled>
+                    <i data-lucide="download"></i> Converter e Baixar
+                </button>
+            </div>
+            
+            <div id="status-message" class="status"></div>
         </div>
 
-        <div class="options">
-            <label for="output-format">Formato de Saída:</label>
-            <select id="output-format" disabled>
-                <option value="">Selecione o arquivo primeiro</option>
-            </select>
-        </div>
-
-        <button id="convert-btn" class="btn" disabled>Converter e Baixar</button>
-        <div id="status-message" class="status"></div>
-
-        <div id="preview-container" class="preview-section" style="display: none;">
-            <h3>Prévia dos Dados</h3>
+        <section id="preview-container" class="preview-section" style="display: none;">
+            <div class="preview-header">
+                <h3><i data-lucide="eye"></i> Prévia e Edição Rápida</h3>
+                <span class="badge">Editável</span>
+            </div>
+            <p class="preview-hint">Dê um clique duplo em uma célula para editar seu conteúdo.</p>
             <div class="table-wrapper">
                 <table id="preview-table"></table>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 FileSwap - Processamento Local & Seguro. by Fma Develop</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
