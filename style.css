@@ -22,9 +22,9 @@ body {
     color: var(--text-main);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
 .container {
@@ -33,7 +33,7 @@ body {
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     width: 100%;
-    max-width: 500px;
+    max-width: 800px;
     text-align: center;
 }
 
@@ -98,6 +98,9 @@ h1 {
     flex-direction: column;
     text-align: left;
     margin-bottom: 24px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .options label {
@@ -124,18 +127,9 @@ select {
     background-size: 0.65rem auto;
 }
 
-select:focus {
-    border-color: var(--primary);
-}
-
-select:disabled {
-    background-color: var(--bg-color);
-    cursor: not-allowed;
-    background-image: none;
-}
-
 .btn {
     width: 100%;
+    max-width: 400px;
     padding: 14px;
     background-color: var(--primary);
     color: white;
@@ -147,27 +141,76 @@ select:disabled {
     transition: background-color 0.2s;
 }
 
-.btn:hover:not(:disabled) {
-    background-color: var(--primary-hover);
-}
-
-.btn:disabled {
-    background-color: var(--border-color);
-    color: var(--text-muted);
-    cursor: not-allowed;
-}
-
 .status {
-    margin-top: 16px;
+    margin: 20px 0;
+    padding: 12px;
+    border-radius: 8px;
     font-size: 14px;
-    min-height: 20px;
     font-weight: 500;
+    display: none;
 }
 
 .status.error {
+    display: block;
+    background-color: #FEF2F2;
     color: var(--error);
+    border: 1px solid #FCA5A5;
 }
 
 .status.success {
+    display: block;
+    background-color: #ECFDF5;
     color: var(--success);
+    border: 1px solid #6EE7B7;
+}
+
+/* Preview Table */
+.preview-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.preview-section h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: #fff;
+}
+
+th {
+    background-color: #F9FAFB;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:nth-child(even) {
+    background-color: #F9FAFB;
 }
